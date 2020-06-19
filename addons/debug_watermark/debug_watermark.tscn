@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/debug_watermark/debug_watermark.gd" type="Script" id=1]
+
+[node name="DebugWatermark" type="CanvasLayer"]
+script = ExtResource( 1 )
+tooltip = "{project_name} {project_version} on {engine_platform}
+Godot version: {engine_version}
+Website: {project_website}
+
+Issues: {project_reports_uri}
+Logs: {project_user_data}"
+
+[node name="DebugLabel" type="Label" parent="."]
+anchor_right = 0.95
+anchor_bottom = 0.95
+hint_tooltip = "Hey"
+mouse_filter = 1
+custom_colors/font_color = Color( 0.94902, 0, 0, 0.752941 )
+custom_colors/font_color_shadow = Color( 0.309804, 0.054902, 0.054902, 0.501961 )
+text = "Debug build"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="DebugLabel" to="." method="_on_DebugLabel_gui_input"]
