@@ -12,14 +12,14 @@ enum Corner {
 	BOTTOM_LEFT = Control.PRESET_BOTTOM_LEFT,
 	BOTTOM_RIGHT = Control.PRESET_BOTTOM_RIGHT,
 }
-export(Corner) var corner = Corner.BOTTOM_RIGHT
-export(float) var margin_ratio = 0.05
+@export var corner : int = Corner.BOTTOM_RIGHT
+@export var margin_ratio : float = 0.05
 
 
 ## Content
 
-export(String) var label_text = "Debug build"
-export(bool) var enable_tooltip = true
+@export var label_text : String = "Debug build"
+@export var enable_tooltip : bool = true
 
 # The following substitution tokens can be used:
 #   {engine_version}        Godot version (auto)
@@ -30,7 +30,7 @@ export(bool) var enable_tooltip = true
 #   {project_version}       Project version (script variable)
 #   {project_website}       Project website (script variable)
 #   {project_reports_uri}   Issue reports URL or email (script variable)
-export(String, MULTILINE) var tooltip = \
+@export_multiline var tooltip : String = \
 """{project_name} {project_version} on {engine_platform}
 Godot version: {engine_version}
 Project website: {project_website}
@@ -39,19 +39,19 @@ Report issues at: {project_reports_uri}
 Find logs at: {project_user_data}
 """
 
-export(String) var project_version = "1.0"
-export(String) var project_website = "https://godotengine.org"
-export(String) var project_reports_uri = "https://github.com/akien-mga/godot-debug-watermark/issues"
+@export var project_version : String = "1.0"
+@export var project_website : String = "https://godotengine.org"
+@export var project_reports_uri : String = "https://github.com/akien-mga/godot-debug-watermark/issues"
 
 
 ## Style
 
-export(Font) var custom_font = null
+@export var custom_font : Font = null
 
 
 ## Behavior
 
-export(bool) var dismiss_with_right_click = true
+@export var dismiss_with_right_click : bool = true
 
 
 func _ready():
@@ -78,12 +78,12 @@ func _ready():
 
 	place_watermark()
 	# Recompute margin on size change.
-	get_tree().get_root().connect("size_changed", self, "place_watermark")
+	get_tree().get_root().size_changed.connect(place_watermark)
 
 
 func place_watermark():
 	"""Handles replacing the watermark when the root Viewport size changes."""
-	var window_size = OS.window_size
+	var window_size = DisplayServer.window_get_size()
 	var margin = int(min(window_size.x, window_size.y) * margin_ratio)
 	$DebugLabel.set_anchors_and_margins_preset(corner, Control.PRESET_MODE_KEEP_SIZE, margin)
 
