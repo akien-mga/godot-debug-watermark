@@ -40,20 +40,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tooltip" type="PanelContainer" parent="DebugLabel"]
-visible = false
-margin_right = 360.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 380, 120 )
+[node name="Tooltip" type="MarginContainer" parent="DebugLabel"]
+margin_right = 440.0
+margin_bottom = 140.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="DebugLabel/Tooltip"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 430.0
+margin_bottom = 130.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="DebugLabel/Tooltip"]
+[node name="MarginContainer" type="MarginContainer" parent="DebugLabel/Tooltip/PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
-margin_right = 379.0
+margin_right = 419.0
 margin_bottom = 119.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -63,13 +74,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DebugLabel/Tooltip/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="DebugLabel/Tooltip/PanelContainer/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 368.0
+margin_right = 408.0
 margin_bottom = 108.0
 size_flags_vertical = 3
 bbcode_enabled = true
 fit_content_height = true
 scroll_active = false
+
 [connection signal="gui_input" from="DebugLabel" to="." method="_on_DebugLabel_gui_input"]
